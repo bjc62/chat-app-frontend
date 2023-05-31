@@ -13,7 +13,6 @@ const MessageControl: React.FC = () => {
   React.useEffect(() => {
     console.log("MessageControl useEffect, connecting to websocket");
     const newSocket = io("http://localhost:3002");
-    console.log(`socket: ${socket}`);
     newSocket.on("server_message", ({ message }) => {
       console.log(`message from server: ${message}`);
     });
@@ -24,6 +23,29 @@ const MessageControl: React.FC = () => {
     };
   }, [user]);
 
+  socket?.emit("register", { email: user?.email });
+
+  const sendMessage = (event: React.MouseEvent<HTMLElement>) => {
+    console.log(`sending message: ${input}`);
+    if (socket) {
+      socket.emit("private_message", {
+        fromUserEmail: user?.email,
+        toUserEmail: "lpaben63@gmail.com",
+        content: input,
+        timestamp: new Date().getTime(),
+      });
+    } else alert("socket instance is null");
+  };
+
+  // socket here should be moved to Chat component
+  // so that when socket receives message, it can append new message
+  // maybe socket needs to be saved to context
+  if (socket) {
+    socket.on("private_message", (obj) => {
+      console.log(`received private_message: ${JSON.stringify(obj)}}`);
+    });
+  }
+
   return (
     <div>
       <input
@@ -33,18 +55,7 @@ const MessageControl: React.FC = () => {
           setInput(event.target.value);
         }}
       />
-      <button
-        onClick={(event) => {
-          console.log(`sending message: ${input}`);
-          if (socket) {
-            socket.emit("client_message", {
-              message: input,
-            });
-          } else alert("socket instance is null");
-        }}
-      >
-        Send
-      </button>
+      <button onClick={sendMessage}>Send</button>
     </div>
   );
 };

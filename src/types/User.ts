@@ -1,6 +1,6 @@
 interface User {
   email: string;
-  chatHistory: User[];
+  chatHistory?: User[];
 }
 
 export default User;
