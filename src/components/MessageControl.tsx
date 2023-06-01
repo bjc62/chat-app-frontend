@@ -1,6 +1,5 @@
 import React from "react";
 import { UserContext } from "../context/UserContext";
-import io, { Socket } from "socket.io-client";
 import { SocketContext } from "../context/SocketContext";
 
 // A React component that connects to the web socket server
@@ -32,13 +31,6 @@ const MessageControl: React.FC = () => {
       });
     } else alert("socket instance is null");
   };
-
-  // socket here should be moved to Chat component
-  // so that when socket receives message, it can append new message
-  // maybe socket needs to be saved to context
-  socket?.on("private_message", (obj) => {
-    console.log(`received private_message: ${JSON.stringify(obj)}}`);
-  });
 
   return (
     <div>

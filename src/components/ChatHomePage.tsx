@@ -5,8 +5,6 @@ import MessageControl from "./MessageControl";
 import { SocketProvider } from "../context/SocketContext";
 
 const ChatHomePage: React.FC = () => {
-  console.log("rendering chat history");
-
   return (
     <SocketProvider>
       <Contacts contacts={[{ email: "1" }, { email: "2" }]} />
