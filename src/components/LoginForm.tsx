@@ -9,12 +9,12 @@ const LoginForm: React.FunctionComponent = () => {
   const { user, setUser } = React.useContext(UserContext);
 
   const fetchUser = async (email: string): Promise<User> => {
-    const user = await axios.get("http://localhost:3001/user", {
+    const response = await axios.get("http://localhost:3001/user", {
       params: {
         email: email,
       },
     });
-    return user.data;
+    return response.data;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
