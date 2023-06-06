@@ -5,7 +5,6 @@ import User from "../types/User";
 
 const LoginForm: React.FunctionComponent = () => {
   const [email, setEmail] = useState("");
-  // const [user, setUser] = useState({});
   const { user, setUser } = React.useContext(UserContext);
 
   const fetchUser = async (email: string): Promise<User> => {

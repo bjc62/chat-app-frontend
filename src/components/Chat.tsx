@@ -14,7 +14,7 @@ const fetchChatMessage = async (
   toUserEmail: string,
   timestamp: number
 ): Promise<Message[]> => {
-  const response = await axios.get("http://localhost:3001/chatHistory", {
+  const response = await axios.get("http://localhost:3001/historicalMessage", {
     params: {
       fromUserEmail,
       toUserEmail,
@@ -33,7 +33,9 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
 
   // fetch historical messages
   React.useEffect(() => {
-    console.log("Chat component fetching message");
+    console.log(
+      `Chat component fetching message for ${props.fromUserEmail}:${props.toUserEmail}:${props.timestamp}`
+    );
     const makeAPIcall = async () => {
       const response = await fetchChatMessage(
         props.fromUserEmail,
@@ -43,13 +45,12 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
       setMessages(response);
     };
     makeAPIcall();
-  }, []);
+  }, [props.toUserEmail]);
 
   // socket to register private_message event
   React.useEffect(() => {
-    console.log("Chat component registering private_message event");
+    console.log("Chat component subscribing private_message event");
     const privateMessageHandler = (message: Message) => {
-      console.log(`received private_message: ${JSON.stringify(message)}}`);
       setMessages((prevMessages) => [...prevMessages, message]);
     };
 

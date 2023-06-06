@@ -7,7 +7,7 @@ interface UserContextProps {
 }
 
 export const UserContext = React.createContext<UserContextProps>({
-  user: { email: "", chatHistory: [] },
+  user: { email: "" },
   setUser: () => {},
 });
 
