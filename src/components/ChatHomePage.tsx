@@ -2,23 +2,42 @@ import React from "react";
 import Contacts from "./Contacts";
 import Chat from "./Chat";
 import MessageControl from "./MessageControl";
-import { SocketProvider } from "../context/SocketContext";
+import { SocketContext, SocketProvider } from "../context/SocketContext";
+import { UserContext } from "../context/UserContext";
+import User from "../types/User";
+import FindNewContact from "./FIndNewContact";
 
 const ChatHomePage: React.FC = () => {
+  const [selectedToUserEmail, setSelectedToUserEmail] =
+    React.useState<string>("");
+
   return (
-    <SocketProvider>
-      <Contacts contacts={[{ email: "1" }, { email: "2" }]} />
-      <div>
+    <>
+      <div id="ChatControlPanel">
+        <Contacts setSelectedToUserEmail={setSelectedToUserEmail} />
+        <FindNewContact
+          setSelectedToUserEmail={setSelectedToUserEmail}
+        ></FindNewContact>
+      </div>
+
+      <div id="Chat">
         <Chat
           fromUserEmail="lpaben62@gmail.com"
-          toUserEmail="lpaben63@gmail.com"
+          toUserEmail={selectedToUserEmail}
           timestamp={new Date(
             new Date().setDate(new Date().getDate() - 7)
           ).getTime()}
         ></Chat>
-        <MessageControl></MessageControl>
+        {/* {selectedToUserEmail.length > 0 && (
+          <MessageControl
+            selectedToUserEmail={selectedToUserEmail}
+          ></MessageControl>
+        )} */}
+        <MessageControl
+          selectedToUserEmail={selectedToUserEmail}
+        ></MessageControl>
       </div>
-    </SocketProvider>
+    </>
   );
 };
 
