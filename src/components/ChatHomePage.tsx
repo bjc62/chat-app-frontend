@@ -85,18 +85,19 @@ const ChatHomePage: React.FC = () => {
         ></FindNewContact>
       </div>
 
-      {/* todo: not render this div where there is no selectedToUserEmail*/}
-      <div id="Chat">
-        <Chat messages={messages}></Chat>
-        {/* {selectedToUserEmail.length > 0 && (
+      {selectedToUserEmail && (
+        <div id="Chat">
+          <Chat messages={messages}></Chat>
+          {/* {selectedToUserEmail.length > 0 && (
           <MessageControl
             selectedToUserEmail={selectedToUserEmail}
           ></MessageControl>
         )} */}
-        <MessageControl
-          selectedToUserEmail={selectedToUserEmail}
-        ></MessageControl>
-      </div>
+          <MessageControl
+            selectedToUserEmail={selectedToUserEmail}
+          ></MessageControl>
+        </div>
+      )}
     </>
   );
 };
