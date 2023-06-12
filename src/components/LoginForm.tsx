@@ -8,7 +8,7 @@ const LoginForm: React.FunctionComponent = () => {
   const { user, setUser } = React.useContext(UserContext);
 
   const fetchUser = async (email: string): Promise<User> => {
-    const response = await axios.get("http://localhost:3001/user", {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
       params: {
         email: email,
       },

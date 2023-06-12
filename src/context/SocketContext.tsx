@@ -18,7 +18,7 @@ export const SocketProvider: React.FC<{ children?: React.ReactNode }> = ({
   const [socket, setSocket] = React.useState<Socket | null>(null);
 
   useEffect(() => {
-    const socketIo = io("http://localhost:3002");
+    const socketIo = io(`${process.env.REACT_APP_API_URL}`);
     socketIo.emit("register", { email: user?.email });
     setSocket(socketIo);
     return () => {

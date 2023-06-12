@@ -14,13 +14,16 @@ const fetchChatMessage = async (
   toUserEmail: string,
   timestamp: number
 ): Promise<Message[]> => {
-  const response = await axios.get("http://localhost:3001/historicalMessage", {
-    params: {
-      fromUserEmail,
-      toUserEmail,
-      timestamp,
-    },
-  });
+  const response = await axios.get(
+    `${process.env.REACT_APP_API_URL}:3001/historicalMessage`,
+    {
+      params: {
+        fromUserEmail,
+        toUserEmail,
+        timestamp,
+      },
+    }
+  );
   return response.data;
 };
 

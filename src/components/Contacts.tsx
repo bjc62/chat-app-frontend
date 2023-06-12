@@ -18,9 +18,12 @@ const Contacts: React.FC<ContactsProps> = ({ setSelectedToUserEmail }) => {
 
   React.useEffect(() => {
     const makeAPICall = async () => {
-      const response = await axios.get("http://localhost:3001/chatHistory", {
-        params: { userEmail: user?.email },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/chatHistory`,
+        {
+          params: { userEmail: user?.email },
+        }
+      );
       console.log(`fetched chatHistory: ${JSON.stringify(response.data)}`);
       setChatHistories(response.data);
     };
