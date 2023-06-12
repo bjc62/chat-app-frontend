@@ -18,6 +18,7 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
       {props.messages.map((message) => {
         return (
           <li
+            className="list-group-item"
             key={`${message.fromUserEmail}:${message.toUserEmail}:${message.timestamp}`}
           >
             {message.content}

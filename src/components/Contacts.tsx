@@ -39,7 +39,7 @@ const Contacts: React.FC<ContactsProps> = ({ setSelectedToUserEmail }) => {
       <header>Chat History</header>
       <ul>
         {chatHistories?.map((chatHistory) => (
-          <li key={chatHistory.theOtherReceipient}>
+          <li className="list-group-item" key={chatHistory.theOtherReceipient}>
             <a
               href="#"
               onClick={() => handleClick(chatHistory.theOtherReceipient)}

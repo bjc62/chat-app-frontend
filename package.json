@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
@@ -24,7 +25,7 @@
     "@types/socket.io-client": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_API_URL=http://localhost:3001 react-scripts start",
     "build": "react-scripts build",
     "build:prod": "REACT_APP_API_URL=https://chat-app-backend-t4jjit742q-de.a.run.app react-scripts build",
     "build:dev": "REACT_APP_API_URL=http://localhost react-scripts build",
